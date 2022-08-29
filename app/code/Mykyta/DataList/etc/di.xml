@@ -1,0 +1,21 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Mykyta\DataList\Api\Data\DataListInterface" type="Mykyta\DataList\Model\DataList"/>
+    <preference for="Mykyta\DataList\Api\DataListRepositoryInterface" type="Mykyta\DataList\Model\DataListRepository"/>
+    <preference for="Mykyta\DataList\Api\DataListSearchResultInterface" type="Mykyta\DataList\Model\DataListSearchResult"/>
+
+    <virtualType name="Mykyta\DataList\Model\ResourceModel\DataList\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mykyta_data_list</argument>
+            <argument name="resourceModel" xsi:type="string">Mykyta\DataList\Model\ResourceModel\DataList </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="data_list_data_source" xsi:type="string"> Mykyta\DataList\Model\ResourceModel\DataList\Grid\Collection </item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>
