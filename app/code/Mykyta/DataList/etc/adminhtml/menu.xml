@@ -4,7 +4,7 @@
     <menu>
         <add id="Mykyta_DataList::mykyta" title="Mykyta" module="Mykyta_DataList" sortOrder="31"
              resource="Mykyta_DataList::data_list"/>
-        <add id="Mykyta_DataList::data_list" title="Data List" module="Mykyta_DataList" sortOrder="10"
+        <add id="Mykyta_DataList::data_list" title="DataList" module="Mykyta_DataList" sortOrder="10"
              resource="Mykyta_DataList::data_list" parent="Mykyta_DataList::mykyta" action="mykyta/datalist/index"/>
     </menu>
 </config>

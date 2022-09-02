@@ -23,7 +23,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Mykyta_DataList::data_list</aclResource>
-        <dataProvider class="Mykyta\DataList\Ui\DataProvider\DataList\ListingDataProvider" name="data_list_data_source">
+        <dataProvider class="Mykyta\DataList\UI\DataProvider\DataList\ListingDataProvider" name="data_list_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>entity_id</primaryFieldName>
@@ -63,7 +63,7 @@
                 <label translate="true">Type</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Mykyta\DataList\Ui\Component\Listing\Columns\DataListActions" sortOrder="200">
+        <actionsColumn name="actions" class="Mykyta\DataList\UI\Component\Listing\Columns\DataListActions" sortOrder="200">
             <settings>
                 <indexField>entity_id</indexField>
             </settings>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mykyta\DataList\Ui\Component\Listing\Columns;
+namespace Mykyta\DataList\UI\Component\Listing\Columns;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;

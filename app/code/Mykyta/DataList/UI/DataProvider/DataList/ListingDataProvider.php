@@ -1,6 +1,6 @@
 <?php
 
-namespace Mykyta\DataList\Ui\DataProvider\DataList;
+namespace Mykyta\DataList\UI\DataProvider\DataList;
 
 use Mykyta\DataList\Model\ResourceModel\DataList\CollectionFactory;
 use Magento\Ui\DataProvider\AbstractDataProvider;
