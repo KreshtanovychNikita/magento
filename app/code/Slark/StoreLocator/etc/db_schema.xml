@@ -1,0 +1,30 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="slark_store_locator" resource="default" engine="innodb" comment="Elogic Store Locator">
+        <column xsi:type="int" name="store_id" unsigned="true" nullable="false" identity="true"
+                comment="Store ID"/>
+        <column xsi:type="varchar" name="store_name" nullable="false" length="64"
+                comment="Store Name"/>
+        <column xsi:type="varchar" name="description_store" nullable="false" length="128"
+                comment="Description"/>
+        <column xsi:type="varchar" name="addres_store" nullable="false" length="64"
+                comment="Addres Store"/>
+        <column xsi:type="varchar" name="work_schedule" nullable="false" length="128"
+                comment="Work Schedule"/>
+        <column xsi:type="varchar" name="longitude" nullable="false" length="64"
+                comment="Longitude"/>
+        <column xsi:type="varchar" name="latitude" nullable="false" length="64"
+                comment="Latitude"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="Unique">
+            <column name="longitude"/>
+            <column name="latitude"/>
+            <column name="store_name"/>
+        </constraint>
+    </table>
+</schema>
+
+
+
+
