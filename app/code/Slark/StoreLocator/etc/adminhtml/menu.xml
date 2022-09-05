@@ -2,8 +2,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Slark_StoreLocator::slark" title="Elogic" module="Slark_StoreLocator" sortOrder="41"
-             resource="Mykyta_StoreLocator::store_locator"/>
+        <add id="Slark_StoreLocator::slark" title="Elogic Store Locator" module="Slark_StoreLocator" sortOrder="41"
+             resource="Slark_StoreLocator::store_locator"/>
         <add id="Slark_StoreLocator::store_locator" title="Store Locator" module="Slark_StoreLocator" sortOrder="10"
              resource="Slark_StoreLocator::store_locator" parent="Slark_StoreLocator::slark" action="slark/storelocator/index"/>
     </menu>
