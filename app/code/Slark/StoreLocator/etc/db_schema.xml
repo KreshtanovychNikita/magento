@@ -16,13 +16,12 @@
                 comment="Latitude"/>
         <column xsi:type="varchar" name="image" length="255"
                 comment="Image Store"/>
+        <column xsi:type="varchar" name="url_key" comment="Store URL Key"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="store_id"/>
         </constraint>
         <constraint xsi:type="unique" referenceId="Unique">
-            <column name="longitude"/>
-            <column name="latitude"/>
-            <column name="store_name"/>
+            <column name="url_key"/>
         </constraint>
     </table>
 </schema>

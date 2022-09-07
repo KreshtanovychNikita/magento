@@ -35,11 +35,11 @@ class Save extends Action implements HttpPostActionInterface
         $request = $this->getRequest();
         $requestData = $request->getPost()->toArray();
 
-        if (!$request->isPost() || empty($requestData['general'])) {
-            $this->messageManager->addErrorMessage(__('Wrong request.'));
-            $resultRedirect->setPath('*/*/new');
-            return $resultRedirect;
-        }
+//        if (!$request->isPost() || empty($requestData['general'])) {
+//            $this->messageManager->addErrorMessage(__('Wrong request.'));
+//            $resultRedirect->setPath('*/*/new');
+//            return $resultRedirect;
+//        }
 
         try {
             $id = $requestData['general'][StoreLocatorInterface::ID];
@@ -48,68 +48,13 @@ class Save extends Action implements HttpPostActionInterface
             $storeLocator = $this->storeLocatorFactory->create();
         }
 
-        $storeLocator->setName($requestData['general'][StoreLocatorInterface::NAME]);
-        try {
-            $storeLocator = $this->storeLocatorRepository->save($storeLocator);
-            $this->processRedirectAfterSuccessSave($resultRedirect, $storeLocator->getName());
-            $this->messageManager->addSuccessMessage(__('Product type was saved.'));
-
-        } catch (\Exception $exception) {
-            $this->messageManager->addErrorMessage(__('Error. Cannot save'));
-
-            $resultRedirect->setPath('*/*/new');
-        }
-
-        $storeLocator->setAddres($requestData['general'][StoreLocatorInterface::ADDRES]);
-        try {
-            $storeLocator = $this->storeLocatorRepository->save($storeLocator);
-            $this->processRedirectAfterSuccessSave($resultRedirect, $storeLocator->getAddres());
-            $this->messageManager->addSuccessMessage(__('Product type was saved.'));
-
-        } catch (\Exception $exception) {
-            $this->messageManager->addErrorMessage(__('Error. Cannot save'));
-
-            $resultRedirect->setPath('*/*/new');
-        }
-
-        $storeLocator->setWork($requestData['general'][StoreLocatorInterface::WORK]);
-        try {
-            $storeLocator = $this->storeLocatorRepository->save($storeLocator);
-            $this->processRedirectAfterSuccessSave($resultRedirect, $storeLocator->getWork());
-            $this->messageManager->addSuccessMessage(__('Product type was saved.'));
-
-        } catch (\Exception $exception) {
-            $this->messageManager->addErrorMessage(__('Error. Cannot save'));
-
-            $resultRedirect->setPath('*/*/new');
-        }
-
-        $storeLocator->setLati($requestData['general'][StoreLocatorInterface::LATI]);
-        try {
-            $storeLocator = $this->storeLocatorRepository->save($storeLocator);
-            $this->processRedirectAfterSuccessSave($resultRedirect, $storeLocator->getLati());
-            $this->messageManager->addSuccessMessage(__('Product type was saved.'));
-
-        } catch (\Exception $exception) {
-            $this->messageManager->addErrorMessage(__('Error. Cannot save'));
-
-            $resultRedirect->setPath('*/*/new');
-        }
-
-        $storeLocator->setLongi($requestData['general'][StoreLocatorInterface::LONGI]);
-        try {
-            $storeLocator = $this->storeLocatorRepository->save($storeLocator);
-            $this->processRedirectAfterSuccessSave($resultRedirect, $storeLocator->getLongi());
-            $this->messageManager->addSuccessMessage(__('Product type was saved.'));
-
-        } catch (\Exception $exception) {
-            $this->messageManager->addErrorMessage(__('Error. Cannot save'));
-
-            $resultRedirect->setPath('*/*/new');
-        }
+        $storeLocator->setName($request->getParam('store_name'))
+            ->setEmail($request->getParam('email'))
+            ->setMessage($request->getParam('message'))
+            ->setStatus((int) $request->getParam('status'))
+            ->setStoreId((int) $request->getParam('store_id'));
 
 
-        return $resultRedirect;
     }
 
     public function setImage($data, $store): StoreLocatorInterface
