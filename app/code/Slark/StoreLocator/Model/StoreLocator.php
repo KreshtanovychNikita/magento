@@ -77,4 +77,15 @@ class StoreLocator extends AbstractModel implements StoreLocatorInterface
     {
         $this->setData(StoreLocatorInterface::DESC, $desc);
     }
+
+    public function getImage(): string
+    {
+        return $this->getData(StoreLocatorInterface::IMAGE);
+    }
+
+    public function setImage( string $image): void
+    {
+        $this->setData(StoreLocatorInterface::IMAGE, $image);
+    }
+
 }

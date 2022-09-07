@@ -2,6 +2,7 @@
 
 namespace Slark\StoreLocator\Api\Data;
 
+
 interface StoreLocatorInterface
 {
     const ID = 'store_id';
@@ -11,6 +12,7 @@ interface StoreLocatorInterface
     const WORK = 'work_schedule';
     const LONGI = 'longitude';
     const LATI = 'latitude';
+    const IMAGE = "image";
     /**
      * @return string
      */
@@ -65,4 +67,14 @@ interface StoreLocatorInterface
      * @param string $lati
      */
     public function setLati(string $lati): void;
+
+    public function getImage(): string;
+    /**
+     * @return string $image
+     */
+    public function setImage(string $image) : void;
+
+    /**
+     * @return string
+     */
 }
