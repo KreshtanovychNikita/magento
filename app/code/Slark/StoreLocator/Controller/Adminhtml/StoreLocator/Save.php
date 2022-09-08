@@ -44,15 +44,15 @@ class Save extends Action implements HttpPostActionInterface
         } else {
             $data['store_id'] = null;
         }
-        $storeLocator->setName($data['name']);
+        $storeLocator->setName($data['store_name']);
         $storeLocator->setDesc($data['description_store']);
-        $storeLocator->setAddres($data['address_store']);
+        $storeLocator->setAddres($data['addres_store']);
         $storeLocator->setLati($data['latitude']);
         $storeLocator->setLongi($data['longitude']);
         $storeLocator->setWork($data['work_schedule']);
 //        $storeLocator= $this->setImage($data, $store);
 //        $storeLocator->setUrl($data['store_url_key']);
-        $this->storeRepository->save($storeLocator);
+        $this->storeLocatorRepository->save($storeLocator);
 
         $redirectResult->setPath('*/*/index');
         return $redirectResult;

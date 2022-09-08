@@ -44,8 +44,8 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
      */
     public function get(int $id): StoreLocatorInterface
     {
-        $object = $this->StoreLocatorFactory->create();
-        $this->StoreLocatorResource->load($object, $id);
+        $object = $this->storeLocatorFactory->create();
+        $this->storeLocatorResource->load($object, $id);
         if (! $object->getId()) {
             throw new NoSuchEntityException(__('Unable to find entity with ID "%1"', $id));
         }
@@ -80,7 +80,7 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
      */
     public function save(StoreLocatorInterface $storeLocator): StoreLocatorInterface
     {
-        $this->StoreLocatorResource->save($storeLocator);
+        $this->storeLocatorResource->save($storeLocator);
         return $storeLocator;
     }
 
@@ -91,7 +91,7 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
     public function delete(StoreLocatorInterface $workingHours): bool
     {
         try {
-            $this->StoreLocatorResource->delete($workingHours);
+            $this->storeLocatorResource->delete($workingHours);
         } catch (\Exception $e) {
             throw new StateException(__('Unable to remove entity #%1', $workingHours->getId()));
         }

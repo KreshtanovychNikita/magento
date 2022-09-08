@@ -98,15 +98,15 @@
                 <label translate="true">Latitude</label>
             </settings>
         </column>
-        <column name="image" class="Slark\StoreLocator\UI\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="90">
-            <settings>
-                <altField>name</altField>
-                <hasPreview>0</hasPreview>
-                <addField>true</addField>
-                <label translate="true">Image</label>
-                <sortable>false</sortable>
-            </settings>
-        </column>
+<!--        <column name="image" class="Slark\StoreLocator\UI\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="90">-->
+<!--            <settings>-->
+<!--                <altField>name</altField>-->
+<!--                <hasPreview>0</hasPreview>-->
+<!--                <addField>true</addField>-->
+<!--                <label translate="true">Image</label>-->
+<!--                <sortable>false</sortable>-->
+<!--            </settings>-->
+<!--        </column>-->
         <actionsColumn name="actions" class="Slark\StoreLocator\UI\Component\Listing\Columns\StoreLocatorActions" sortOrder="200">
             <settings>
                 <indexField>entity_id</indexField>
