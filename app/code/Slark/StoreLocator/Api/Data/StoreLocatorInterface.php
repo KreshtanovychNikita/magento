@@ -21,7 +21,7 @@ interface StoreLocatorInterface
     /**
      * @param string $name
      */
-    public function setName(string $name): void;
+    public function setName(string $name): StoreLocatorInterface;
     /**
      * @return string
      */
@@ -30,7 +30,7 @@ interface StoreLocatorInterface
     /**
      * @param string $desc
      */
-    public function setDesc(string $desc): void;
+    public function setDesc(string $desc): StoreLocatorInterface;
     /**
      * @return string
      */
@@ -39,7 +39,7 @@ interface StoreLocatorInterface
     /**
      * @param string $addres
      */
-    public function setAddres(string $addres): void;
+    public function setAddres(string $addres): StoreLocatorInterface;
     /**
      * @return string
      */
@@ -48,7 +48,7 @@ interface StoreLocatorInterface
     /**
      * @param string $work
      */
-    public function setWork(string $work): void;
+    public function setWork(string $work): StoreLocatorInterface;
     /**
      * @return string
      */
@@ -57,7 +57,7 @@ interface StoreLocatorInterface
     /**
      * @param string $longi
      */
-    public function setLongi(string $longi): void;
+    public function setLongi(string $longi): StoreLocatorInterface;
     /**
      * @return string
      */
@@ -66,13 +66,13 @@ interface StoreLocatorInterface
     /**
      * @param string $lati
      */
-    public function setLati(string $lati): void;
+    public function setLati(string $lati): StoreLocatorInterface;
 
     public function getImage(): string;
     /**
      * @return string $image
      */
-    public function setImage(string $image) : void;
+    public function setImage(string $image) : StoreLocatorInterface;
 
     /**
      * @return string

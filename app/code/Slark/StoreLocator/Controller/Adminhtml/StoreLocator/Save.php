@@ -2,76 +2,76 @@
 
 namespace Slark\StoreLocator\Controller\Adminhtml\StoreLocator;
 
-use Slark\StoreLocator\Api\StoreLocatorRepositoryInterface;
-use Slark\StoreLocator\Model\StoreLocatorFactory;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\InventoryApi\Api\Data\SourceInterface;
+use Slark\StoreLocator\Api\StoreLocatorRepositoryInterface;
+use Slark\StoreLocator\Model\StoreLocatorFactory;
 use Slark\StoreLocator\Model\StoreLocatorRepository;
 
 class Save extends Action implements HttpPostActionInterface
 {
     private StoreLocatorRepositoryInterface $storeLocatorRepository;
     private StoreLocatorFactory $storeLocatorFactory;
+    private RedirectFactory $redirectFactory;
 
     public function __construct(
         Context $context,
         StoreLocatorRepository $storeLocatorRepository,
-        StoreLocatorFactory $storeLocatorFactory
+        StoreLocatorFactory $storeLocatorFactory,
+        RedirectFactory     $redirectFactory
     ) {
         parent::__construct($context);
         $this->storeLocatorRepository = $storeLocatorRepository;
         $this->storeLocatorFactory = $storeLocatorFactory;
+        $this->redirectFactory = $redirectFactory;
     }
 
-    public function execute(): ResultInterface
+    public function execute()
     {
-        $resultRedirect = $this->resultRedirectFactory->create();
-        $request = $this->getRequest();
-        $requestData = $request->getPost()->toArray();
+        $redirectResult = $this->redirectFactory->create();
+        $storeLocator= $this->storeLocatorFactory->create();
+        $data = $this->getRequest()->getPostValue();
 
-//        if (!$request->isPost() || empty($requestData['general'])) {
-//            $this->messageManager->addErrorMessage(__('Wrong request.'));
-//            $resultRedirect->setPath('*/*/new');
-//            return $resultRedirect;
-//        }
-
-        try {
-            $id = $requestData['general'][StoreLocatorInterface::ID];
-            $storeLocator = $this->storeLocatorRepository->get($id);
-        } catch (\Exception $e) {
-            $storeLocator = $this->storeLocatorFactory->create();
-        }
-
-        $storeLocator->setName($request->getParam('store_name'))
-            ->setEmail($request->getParam('email'))
-            ->setMessage($request->getParam('message'))
-            ->setStatus((int) $request->getParam('status'))
-            ->setStoreId((int) $request->getParam('store_id'));
-
-
-    }
-
-    public function setImage($data, $store): StoreLocatorInterface
-    {
-        if (isset($data['image'][0]['name']) && isset($data['image'][0]['tmp_name'])) {
-            $data['image'] = $data['image'][0]['name'];
-            $this->imageUploader->moveFileFromTmp($data['image']);
-        } elseif (isset($data['image'][0]['name']) && !isset($data['image'][0]['tmp_name'])) {
-            $data['image'] = $data['image'][0]['name'];
+//        var_dump($this->getRequest()->getParams());
+//        die;
+        if (isset($data['store_id'])) {
+            $storeLocator->setId($data['store_id']);
         } else {
-            $data['image'] = '';
+            $data['store_id'] = null;
         }
-        $store->setImage($data['image']);
-        return $store;
+        $storeLocator->setName($data['name']);
+        $storeLocator->setDesc($data['description_store']);
+        $storeLocator->setAddres($data['address_store']);
+        $storeLocator->setLati($data['latitude']);
+        $storeLocator->setLongi($data['longitude']);
+        $storeLocator->setWork($data['work_schedule']);
+//        $storeLocator= $this->setImage($data, $store);
+//        $storeLocator->setUrl($data['store_url_key']);
+        $this->storeRepository->save($storeLocator);
+
+        $redirectResult->setPath('*/*/index');
+        return $redirectResult;
     }
 
 
+//    public function setImage($data, $store): StoreLocatorInterface
+//    {
+//        if (isset($data['image'][0]['name']) && isset($data['image'][0]['tmp_name'])) {
+//            $data['image'] = $data['image'][0]['name'];
+//            $this->imageUploader->moveFileFromTmp($data['image']);
+//        } elseif (isset($data['image'][0]['name']) && !isset($data['image'][0]['tmp_name'])) {
+//            $data['image'] = $data['image'][0]['name'];
+//        } else {
+//            $data['image'] = '';
+//        }
+//        $storeLocator->setImage($data['image']);
+//        return $store;
+//    }
 
     private function processRedirectAfterSuccessSave(Redirect $resultRedirect, string $id)
     {
@@ -95,4 +95,3 @@ class Save extends Action implements HttpPostActionInterface
         }
     }
 }
-

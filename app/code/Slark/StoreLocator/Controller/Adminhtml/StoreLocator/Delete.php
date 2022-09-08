@@ -2,17 +2,15 @@
 
 namespace Slark\StoreLocator\Controller\Adminhtml\StoreLocator;
 
-use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
-use Slark\StoreLocator\Api\StoreLocatorRepositoryInterface;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 
 class Delete extends Action implements HttpPostActionInterface
 {
-
     private StoreLocatorInterface $storeLocatorRepository;
 
     public function __construct(
@@ -29,22 +27,18 @@ class Delete extends Action implements HttpPostActionInterface
         $request = $this->getRequest();
         $dataListId = (int)$this->getRequest()->getParam('id');
 
-        if(!$dataListId) {
+        if (!$dataListId) {
             $this->messageManager->addErrorMessage(__('Error.'));
             return $resultRedirect->setPath('*/*/index');
-
         }
 
         try {
             $storeLocator = $this->storeLocatorRepository->get($storeLocatorId);
             $this->storeLocatorRepository->delete($storeLocator);
             $this->messageManager->addSuccessMessage(__('You deleted the product type.'));
-
         } catch (NoSuchEntityException $e) {
             $this->messageManager->addErrorMessage(__('Cannot delete product type'));
-
         }
         return $resultRedirect->setPath('*/*/index');
     }
 }
-

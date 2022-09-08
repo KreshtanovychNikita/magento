@@ -31,9 +31,9 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
         StoreLocatorResource  $storeLocatorResource,
         StoreLocatorSearchResultInterfaceFactory $searchResultInterfaceFactory
     ) {
-        $this->StoreLocatorFactory = $storeLocatorFactory;
+        $this->storeLocatorFactory = $storeLocatorFactory;
         $this->collectionFactory = $collectionFactory;
-        $this->StoreLocatorResource = $storeLocatorResource;
+        $this->storeLocatorResource = $storeLocatorResource;
         $this->searchResultFactory = $searchResultInterfaceFactory;
     }
 

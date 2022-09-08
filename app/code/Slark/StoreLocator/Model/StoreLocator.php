@@ -17,9 +17,10 @@ class StoreLocator extends AbstractModel implements StoreLocatorInterface
         return $this->getData(StoreLocatorInterface::NAME);
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): StoreLocatorInterface
     {
-        $this->setData(StoreLocatorInterface::NAME, $name);
+        $this->setData(self::NAME, $name);
+        return $this;
     }
 
     public function getId()
@@ -37,45 +38,50 @@ class StoreLocator extends AbstractModel implements StoreLocatorInterface
         return $this->getData(StoreLocatorInterface::ADDRES);
     }
 
-    public function setAddres(string $addres): void
+    public function setAddres(string $addres): StoreLocatorInterface
     {
-        $this->setData(StoreLocatorInterface::ADDRES, $addres);
+        $this->setData(self::ADDRES, $addres);
+        return $this;
     }
     public function getWork(): string
     {
         return $this->getData(StoreLocatorInterface::WORK);
     }
 
-    public function setWork(string $work): void
+    public function setWork(string $work): StoreLocatorInterface
     {
         $this->setData(StoreLocatorInterface::WORK, $work);
+        return $this;
     }
     public function getLati(): string
     {
         return $this->getData(StoreLocatorInterface::LATI);
     }
 
-    public function setLati(string $lati): void
+    public function setLati(string $lati):StoreLocatorInterface
     {
-        $this->setData(StoreLocatorInterface::LATI, $lati);
+        $this->setData(self::LATI, $lati);
+        return $this;
     }
     public function getLongi(): string
     {
         return $this->getData(StoreLocatorInterface::LONGI);
     }
 
-    public function setLongi(string $longi): void
+    public function setLongi(string $longi):StoreLocatorInterface
     {
-        $this->setData(StoreLocatorInterface::LONGI, $longi);
+        $this->setData(self::LONGI, $longi);
+        return $this;
     }
     public function getDesc(): string
     {
         return $this->getData(StoreLocatorInterface::DESC);
     }
 
-    public function setDesc(string $desc): void
+    public function setDesc(string $desc):StoreLocatorInterface
     {
-        $this->setData(StoreLocatorInterface::DESC, $desc);
+        $this->setData(self::DESC, $desc);
+        return $this;
     }
 
     public function getImage(): string
@@ -83,9 +89,9 @@ class StoreLocator extends AbstractModel implements StoreLocatorInterface
         return $this->getData(StoreLocatorInterface::IMAGE);
     }
 
-    public function setImage( string $image): void
+    public function setImage(string $image):StoreLocatorInterface
     {
-        $this->setData(StoreLocatorInterface::IMAGE, $image);
+        $this->setData(self::IMAGE, $image);
+        return $this;
     }
-
 }

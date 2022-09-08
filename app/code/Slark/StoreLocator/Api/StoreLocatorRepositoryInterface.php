@@ -11,6 +11,9 @@ interface StoreLocatorRepositoryInterface
      * @param int $id
      * @return StoreLocatorInterface
      */
+    //public function save(StoreLocatorInterface $store): StoreLocatorInterface;
+
+
     public function get(int $id): StoreLocatorInterface;
 
     /**
