@@ -2,27 +2,38 @@
 
 namespace Slark\StoreLocator\UI\DataProvider\StoreLocator;
 
-use Slark\StoreLocator\Model\ResourceModel\StoreLocator\CollectionFactory;
-use Magento\Ui\DataProvider\AbstractDataProvider;
-use Slark\StoreLocator\Model\ResourceModel\StoreLocator\Collection;
-
-
-class ListingDataProvider extends AbstractDataProvider
+class ListingDataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
-    private CollectionFactory $collectionFactory;
-    //protected Collection $collection;
+    private \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $storeLocatorCollectionFactory;
+    private array $loadedData = [];
 
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
-        CollectionFactory $collectionFactory,
+        \Magento\Backend\Model\UrlInterface $urlBuilder,
+        // @TODO: use repository or not?
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $storeLocatorCollectionFactory,
+        string $name,
+        string $primaryFieldName,
+        string $requestFieldName,
+        \Magento\Framework\Api\Search\ReportingInterface $reporting,
+        \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
+        \Magento\Framework\App\RequestInterface $request,
+        \Magento\Framework\Api\FilterBuilder $filterBuilder,
         array $meta = [],
         array $data = []
     ) {
-        $this->collectionFactory = $collectionFactory;
-        $this->collection = $collectionFactory->create();
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+        parent::__construct(
+            $name,
+            $primaryFieldName,
+            $requestFieldName,
+            $reporting,
+            $searchCriteriaBuilder,
+            $request,
+            $filterBuilder,
+            $meta,
+            $data
+        );
+        $this->urlBuilder = $urlBuilder;
+        $this->storeLocatorCollectionFactory = $storeLocatorCollectionFactory;
     }
 
     public function getData() : array
@@ -33,5 +44,6 @@ class ListingDataProvider extends AbstractDataProvider
         $items = $this->getCollection()->toArray();
 
         return $items;
+
     }
 }
