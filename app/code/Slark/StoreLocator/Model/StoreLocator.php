@@ -94,4 +94,13 @@ class StoreLocator extends AbstractModel implements StoreLocatorInterface
         $this->setData(self::IMAGE, $image);
         return $this;
     }
+    public function getUrl(): string
+    {
+        return $this->getUrl(StoreLocatorInterface::URL);
+    }
+    public function setUrl(string $url): StoreLocatorInterface
+    {
+        $this->setData(self::URL, $url);
+        return $this;
+    }
 }

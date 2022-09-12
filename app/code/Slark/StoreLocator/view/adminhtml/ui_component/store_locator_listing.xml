@@ -20,13 +20,16 @@
     </settings>
     <dataSource name="store_locator_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">store_id</param>
+            </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Slark_StoreLocator::store_locator</aclResource>
         <dataProvider class="Slark\StoreLocator\UI\DataProvider\StoreLocator\ListingDataProvider" name="store_locator_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
-                <primaryFieldName>entity_id</primaryFieldName>
+                <primaryFieldName>store_id</primaryFieldName>
             </settings>
         </dataProvider>
     </dataSource>
@@ -53,6 +56,7 @@
             <settings>
                 <filter>text</filter>
                 <dataType>text</dataType>
+                <dataScope>store_id</dataScope>
                 <label translate="true">ID</label>
             </settings>
         </column>
@@ -60,6 +64,7 @@
             <settings>
                 <filter>text</filter>
                 <dataType>text</dataType>
+                <dataScope>store_name</dataScope>
                 <label translate="true">Store Name</label>
             </settings>
         </column>
@@ -67,6 +72,7 @@
             <settings>
                 <filter>text</filter>
                 <dataType>text</dataType>
+                <dataScope>description_store</dataScope>
                 <label translate="true">Description</label>
             </settings>
         </column>
@@ -74,6 +80,7 @@
             <settings>
                 <filter>text</filter>
                 <dataType>text</dataType>
+                <dataScope>addres_store</dataScope>
                 <label translate="true">Addres Store</label>
             </settings>
         </column>
@@ -81,6 +88,7 @@
             <settings>
                 <filter>text</filter>
                 <dataType>text</dataType>
+                <dataScope>work_schedule</dataScope>
                 <label translate="true">Work Schedule</label>
             </settings>
         </column>
@@ -88,6 +96,7 @@
             <settings>
                 <filter>text</filter>
                 <dataType>text</dataType>
+                <dataScope>longitude</dataScope>
                 <label translate="true">Longitude</label>
             </settings>
         </column>
@@ -95,7 +104,16 @@
             <settings>
                 <filter>text</filter>
                 <dataType>text</dataType>
+                <dataScope>latitude</dataScope>
                 <label translate="true">Latitude</label>
+            </settings>
+        </column>
+        <column name="url_key" sortOrder="80">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <dataScope>url_key</dataScope>
+                <label translate="true">URL KEY</label>
             </settings>
         </column>
 <!--        <column name="image" class="Slark\StoreLocator\UI\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="90">-->
@@ -109,7 +127,7 @@
 <!--        </column>-->
         <actionsColumn name="actions" class="Slark\StoreLocator\UI\Component\Listing\Columns\StoreLocatorActions" sortOrder="200">
             <settings>
-                <indexField>entity_id</indexField>
+                <indexField>store_id</indexField>
             </settings>
         </actionsColumn>
     </columns>

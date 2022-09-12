@@ -2,6 +2,7 @@
 
 namespace Slark\StoreLocator\Api\Data;
 
+//use Magento\Tests\NamingConvention\true\string;
 
 interface StoreLocatorInterface
 {
@@ -13,9 +14,9 @@ interface StoreLocatorInterface
     const LONGI = 'longitude';
     const LATI = 'latitude';
     const IMAGE = "image";
-    /**
-     * @return string
-     */
+    const URL = "url_key";
+
+
     public function getName(): string;
 
     /**
@@ -70,11 +71,22 @@ interface StoreLocatorInterface
 
     public function getImage(): string;
     /**
-     * @return string $image
+     * @param  string $image
      */
     public function setImage(string $image) : StoreLocatorInterface;
 
     /**
      * @return string
      */
+    public function getUrl(): string;
+
+    /**
+     * @param string $url
+     *
+     */
+    public function setUrl(string $url): StoreLocatorInterface;
+    /**
+     * @return string
+     */
 }
+

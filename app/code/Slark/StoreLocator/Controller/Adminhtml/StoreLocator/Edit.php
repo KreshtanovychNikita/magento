@@ -42,7 +42,7 @@ class Edit extends Action
                 ->addBreadcrumb(__('Edit Store Locator'), __('Store Locator'));
             $result->getConfig()
                 ->getTitle()
-                ->prepend(__('Edit Store Locator: %type', ['type' => $type->getType()]));
+                ->prepend(__('Edit Store Locator:%store_name', ['store_name' => $type->getName()]));
         } catch (NoSuchEntityException $e) {
             /** @var Redirect $result */
             $result = $this->resultRedirectFactory->create();

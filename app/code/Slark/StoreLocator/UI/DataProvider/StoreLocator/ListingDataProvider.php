@@ -2,41 +2,34 @@
 
 namespace Slark\StoreLocator\UI\DataProvider\StoreLocator;
 
-class ListingDataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
+use Slark\StoreLocator\Model\ResourceModel\StoreLocator\CollectionFactory;
+use Magento\Ui\DataProvider\AbstractDataProvider;
+
+
+class ListingDataProvider extends AbstractDataProvider
 {
-    private \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $storeLocatorCollectionFactory;
-    private array $loadedData = [];
+    private CollectionFactory $collectionFactory;
 
     public function __construct(
-        \Magento\Backend\Model\UrlInterface $urlBuilder,
-        // @TODO: use repository or not?
-        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $storeLocatorCollectionFactory,
-        string $name,
-        string $primaryFieldName,
-        string $requestFieldName,
-        \Magento\Framework\Api\Search\ReportingInterface $reporting,
-        \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
-        \Magento\Framework\App\RequestInterface $request,
-        \Magento\Framework\Api\FilterBuilder $filterBuilder,
+        $name,
+        $primaryFieldName,
+        $requestFieldName,
+        CollectionFactory $collectionFactory,
         array $meta = [],
         array $data = []
     ) {
+        $this->collectionFactory = $collectionFactory;
+        $this->collection = $collectionFactory->create();
         parent::__construct(
             $name,
             $primaryFieldName,
             $requestFieldName,
-            $reporting,
-            $searchCriteriaBuilder,
-            $request,
-            $filterBuilder,
             $meta,
             $data
         );
-        $this->urlBuilder = $urlBuilder;
-        $this->storeLocatorCollectionFactory = $storeLocatorCollectionFactory;
     }
 
-    public function getData() : array
+    public function getData()
     {
         if (!$this->getCollection()->isLoaded()) {
             $this->getCollection()->load();
@@ -44,6 +37,5 @@ class ListingDataProvider extends \Magento\Framework\View\Element\UiComponent\Da
         $items = $this->getCollection()->toArray();
 
         return $items;
-
     }
 }
