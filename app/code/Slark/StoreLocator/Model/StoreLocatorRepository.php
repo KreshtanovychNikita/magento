@@ -2,15 +2,14 @@
 
 namespace Slark\StoreLocator\Model;
 
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 use Slark\StoreLocator\Api\StoreLocatorRepositoryInterface;
 use Slark\StoreLocator\Api\StoreLocatorSearchResultInterface;
-use Slark\StoreLocator\Model\ResourceModel\StoreLocator\CollectionFactory;
-use Slark\StoreLocator\Model\ResourceModel\StoreLocator as StoreLocatorResource;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Api\SearchCriteriaInterface;
 use Slark\StoreLocator\Api\StoreLocatorSearchResultInterfaceFactory;
-use Slark\StoreLocator\Model\StoreLocatorFactory;
+use Slark\StoreLocator\Model\ResourceModel\StoreLocator as StoreLocatorResource;
+use Slark\StoreLocator\Model\ResourceModel\StoreLocator\CollectionFactory;
 
 class StoreLocatorRepository implements StoreLocatorRepositoryInterface
 {
@@ -96,5 +95,12 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
             throw new StateException(__('Unable to remove entity #%1', $workingHours->getId()));
         }
         return true;
+    }
+
+    public function getById(int $store_id): StoreLocatorSearchResultInterface
+    {
+        $locator = $this->storeLocatorFactory->create();
+        $this->storeLocatorResource->load($locator, $store_id);
+        return $locator;
     }
 }

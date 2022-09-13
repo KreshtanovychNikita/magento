@@ -77,19 +77,6 @@ class Save extends Action implements HttpPostActionInterface
 //        return $redirectResult;
     }
 
-//    public function setImage($data, $store): StoreLocatorInterface
-//    {
-//        if (isset($data['image'][0]['name']) && isset($data['image'][0]['tmp_name'])) {
-//            $data['image'] = $data['image'][0]['name'];
-//            $this->imageUploader->moveFileFromTmp($data['image']);
-//        } elseif (isset($data['image'][0]['name']) && !isset($data['image'][0]['tmp_name'])) {
-//            $data['image'] = $data['image'][0]['name'];
-//        } else {
-//            $data['image'] = '';
-//        }
-//        $storeLocator->setImage($data['image']);
-//        return $store;
-//    }
 
     private function processRedirectAfterSuccessSave(Redirect $resultRedirect, string $id)
     {

@@ -2,8 +2,8 @@
 
 namespace Slark\StoreLocator\Api;
 
-use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
+use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 
 interface StoreLocatorRepositoryInterface
 {
@@ -12,7 +12,6 @@ interface StoreLocatorRepositoryInterface
      * @return StoreLocatorInterface
      */
     //public function save(StoreLocatorInterface $store): StoreLocatorInterface;
-
 
     public function get(int $id): StoreLocatorInterface;
 
@@ -33,4 +32,12 @@ interface StoreLocatorRepositoryInterface
      * @return bool
      */
     public function delete(StoreLocatorInterface $workingHours): bool;
+    /**
+     * @param StoreLocatorInterface $store_id
+     * @return StoreLocatorInterface
+     */
+    public function getById(int $store_id): StoreLocatorSearchResultInterface;
+
+
+//    public function deleteById(int $store_id): StoreLocatorSearchResultInterface;
 }

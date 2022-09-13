@@ -16,7 +16,9 @@ use Magento\Framework\View\Element\UiComponentFactory;
  */
 class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
 {
-    const NAME = 'image';
+    const NAME = 'thumbnail';
+
+    const ALT_FIELD = 'name';
 
     /**
      * @var \Magento\Catalog\Helper\Image
@@ -55,26 +57,24 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
      * @param array $dataSource
      * @return array
      */
-    public function prepareDataSource(array $dataSource): array
+    public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');
             foreach ($dataSource['data']['items'] as & $item) {
-                $url = '';
-                if ($item[$fieldName] !== '') {
-                    $url = $this->storeManager->getStore()->getBaseUrl(
-                        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                    ) . 'slark/base_path/' . $item[$fieldName];
-                }
-                $item[$fieldName . '_src'] = $url;
-                $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';
+                $locator = new \Magento\Framework\DataObject($item);
+                $imageHelper = $this->imageHelper->init($locator, 'store_locator_listing_thumbnail');
+                $item[$fieldName . '_src'] = $imageHelper->getUrl();
+                $item[$fieldName . '_alt'] = $this->getAlt($item) ?: $imageHelper->getLabel();
                 $item[$fieldName . '_link'] = $this->urlBuilder->getUrl(
-                    'storelocator/index/edit',
-                    ['store_id' => $item['store_id']]
+                    'slark/storelocator/edit',
+                    ['id' => $locator->getEntityId(), 'store' => $this->context->getRequestParam('store')]
                 );
-                $item[$fieldName . '_orig_src'] = $url;
+                $origImageHelper = $this->imageHelper->init($locator, 'store_locator_listing_thumbnail_preview');
+                $item[$fieldName . '_orig_src'] = $origImageHelper->getUrl();
             }
         }
+
         return $dataSource;
     }
 
@@ -85,4 +85,9 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
      *
      * @return null|string
      */
+    protected function getAlt($row)
+    {
+        $altField = $this->getData('config/altField') ?: self::ALT_FIELD;
+        return $row[$altField] ?? null;
+    }
 }

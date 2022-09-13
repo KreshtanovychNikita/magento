@@ -38,16 +38,14 @@ class StoreLocatorActions extends Column
      * @param array $dataSource
      * @return array
      */
-    public function prepareDataSource(array $dataSource)
+    public function prepareDataSource(array $dataSource): array
     {
         if (isset($dataSource['data']['items'])) {
-            $storeId = $this->context->getFilterParam('store_id');
-
             foreach ($dataSource['data']['items'] as &$item) {
                 $item[$this->getData('name')]['edit'] = [
                     'href' => $this->urlBuilder->getUrl(
                         'slark/storelocator/edit',
-                        ['id' => $item['store_id']]
+                        ['store_id' => $item['store_id']]
                     ),
                     'label' => __('Edit'),
                     'hidden' => false,
