@@ -62,15 +62,15 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
         if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');
             foreach ($dataSource['data']['items'] as & $item) {
-                $locator = new \Magento\Framework\DataObject($item);
-                $imageHelper = $this->imageHelper->init($locator, 'store_locator_listing_thumbnail');
+                $product = new \Magento\Framework\DataObject($item);
+                $imageHelper = $this->imageHelper->init($product, 'store_locator_listing_thumbnail');
                 $item[$fieldName . '_src'] = $imageHelper->getUrl();
                 $item[$fieldName . '_alt'] = $this->getAlt($item) ?: $imageHelper->getLabel();
                 $item[$fieldName . '_link'] = $this->urlBuilder->getUrl(
                     'slark/storelocator/edit',
-                    ['id' => $locator->getEntityId(), 'store' => $this->context->getRequestParam('store')]
+                    ['id' => $product->getId(), 'store' => $this->context->getRequestParam('store')]
                 );
-                $origImageHelper = $this->imageHelper->init($locator, 'store_locator_listing_thumbnail_preview');
+                $origImageHelper = $this->imageHelper->init($product, 'store_locator_listing_thumbnail_preview');
                 $item[$fieldName . '_orig_src'] = $origImageHelper->getUrl();
             }
         }

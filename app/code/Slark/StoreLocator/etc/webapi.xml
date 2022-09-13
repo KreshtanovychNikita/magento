@@ -6,16 +6,28 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
-    <route url="/V1/Slark/storelocator/:id" method="GET">
+    <route url="/V1/Slark/storelocator/id/:id" method="GET">
         <service class="Slark\StoreLocator\Api\StoreLocatorRepositoryInterface" method="getById"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
     </route>
-<!--    <route url="/V1/Slark/storelocator/delete/:id" method="DELETE">-->
-<!--        <service class="Slark\StoreLocator\Api\StoreLocatorRepositoryInterface" method="deleteById"/>-->
-<!--        <resources>-->
-<!--            <resource ref="Slark_StoreLocator::page_delete"/>-->
-<!--        </resources>-->
-<!--    </route>-->
+    <route url="/V1/Slark/storelocator/save" method="POST">
+        <service class="Slark\StoreLocator\Api\StoreLocatorRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/Slark/storelocator/create" method="POST">
+        <service class="Slark\StoreLocator\Api\StoreLocatorRepositoryInterface" method="create"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+        <route url="/V1/Slark/storelocator/delete/:id" method="DELETE">
+        <service class="Slark\StoreLocator\Api\StoreLocatorRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Slark_StoreLocator::page_delete"/>
+        </resources>
+    </route>
 </routes>

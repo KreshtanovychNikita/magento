@@ -2,14 +2,14 @@
 
 namespace Slark\StoreLocator\UI\DataProvider\StoreLocator;
 
-use Slark\StoreLocator\Model\ResourceModel\StoreLocator\CollectionFactory;
 use Magento\Ui\DataProvider\AbstractDataProvider;
-
+use Slark\StoreLocator\Model\ResourceModel\StoreLocator\CollectionFactory;
 
 class EditDataProvider extends AbstractDataProvider
 {
     public function __construct(
-        $name, $primaryFieldName,
+        $name,
+        $primaryFieldName,
         $requestFieldName,
         CollectionFactory $collectionFactory,
         array $meta = [],
@@ -25,7 +25,8 @@ class EditDataProvider extends AbstractDataProvider
         );
     }
 
-    public function getDataSourseData(){
+    public function getDataSourseData()
+    {
         return [];
     }
 

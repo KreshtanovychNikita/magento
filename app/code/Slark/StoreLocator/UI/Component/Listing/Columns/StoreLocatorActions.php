@@ -13,6 +13,7 @@ class StoreLocatorActions extends Column
      * @var UrlInterface
      */
     protected $urlBuilder;
+    private const URL_PATH_EDIT = "slark/storelocator/edit";
 
     /**
      * @param ContextInterface $context
