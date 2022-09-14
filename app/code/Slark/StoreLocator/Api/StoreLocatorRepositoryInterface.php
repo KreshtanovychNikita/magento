@@ -8,12 +8,10 @@ use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 interface StoreLocatorRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param mixed $id
      * @return StoreLocatorInterface
      */
-    //public function save(StoreLocatorInterface $store): StoreLocatorInterface;
-
-    public function get(int $id): StoreLocatorInterface;
+    public function get($id): StoreLocatorInterface;
 
     /**
      * @param SearchCriteriaInterface $searchCriteria
@@ -25,6 +23,18 @@ interface StoreLocatorRepositoryInterface
      * @param StoreLocatorInterface $storeLocator
      * @return StoreLocatorInterface
      */
+    public function save(StoreLocatorInterface $storeLocator): StoreLocatorInterface;
+
+    /**
+     * @param StoreLocatorInterface $workingHours
+     * @return bool
+     */
+    public function delete(StoreLocatorInterface $workingHours): bool;
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function deleteById(int $id);
 //    public function save(StoreLocatorInterface $storeLocator): StoreLocatorInterface;
 //
 //    /**
@@ -32,11 +42,11 @@ interface StoreLocatorRepositoryInterface
 //     * @return bool
 //     */
 //    public function delete(StoreLocatorInterface $workingHours): bool;
-//    /**
-//     * @param StoreLocatorInterface $store_id
-//     * @return StoreLocatorInterface
-//     */
-//    public function getById(int $store_id): StoreLocatorSearchResultInterface;
+    /**
+     * @param StoreLocatorInterface $store_id
+     * @return StoreLocatorInterface
+     */
+    public function getById(int $store_id): StoreLocatorSearchResultInterface;
 //
 //    /**
 //     * Create attribute set from data

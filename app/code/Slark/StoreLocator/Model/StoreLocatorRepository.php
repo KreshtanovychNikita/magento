@@ -41,7 +41,7 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
      * @return StoreLocatorInterface
      * @throws NoSuchEntityException
      */
-    public function get(int $id): StoreLocatorInterface
+    public function get($id): StoreLocatorInterface
     {
         $object = $this->storeLocatorFactory->create();
         $this->storeLocatorResource->load($object, $id);
@@ -77,30 +77,38 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
      * @return StoreLocatorInterface
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
-//    public function save(StoreLocatorInterface $storeLocator): StoreLocatorInterface
-//    {
-//        $this->storeLocatorResource->save($storeLocator);
-//        return $storeLocator;
-//    }
-//
-//    /**
-//     * @param StoreLocatorInterface $workingHours
-//     * @return bool
-//     */
-//    public function delete(StoreLocatorInterface $workingHours): bool
-//    {
-//        try {
-//            $this->storeLocatorResource->delete($workingHours);
-//        } catch (\Exception $e) {
-//            throw new StateException(__('Unable to remove entity #%1', $workingHours->getId()));
-//        }
-//        return true;
-//    }
-//
-//    public function getById(int $store_id): StoreLocatorSearchResultInterface
-//    {
-//        $locator = $this->storeLocatorFactory->create();
-//        $this->storeLocatorResource->load($locator, $store_id);
-//        return $locator;
-//    }
+    public function save(StoreLocatorInterface $storeLocator): StoreLocatorInterface
+    {
+        $this->storeLocatorResource->save($storeLocator);
+        return $storeLocator;
+    }
+
+    /**
+     * @param StoreLocatorInterface $workingHours
+     * @return bool
+     */
+    public function delete(StoreLocatorInterface $workingHours): bool
+    {
+        try {
+            $this->storeLocatorResource->delete($workingHours);
+        } catch (\Exception $e) {
+            throw new StateException(__('Unable to remove entity #%1', $workingHours->getId()));
+        }
+        return true;
+    }
+
+    public function getById(int $store_id): StoreLocatorSearchResultInterface
+    {
+        $locator = $this->storeLocatorFactory->create();
+        $this->storeLocatorResource->load($locator, $store_id);
+        return $locator;
+    }
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function deleteById(int $id)
+    {
+        return $this->delete($this->get($id));
+    }
 }

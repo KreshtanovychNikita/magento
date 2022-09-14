@@ -32,7 +32,7 @@ class Edit extends Action
 
     public function execute(): ResultInterface
     {
-        $id = $this->getRequest()->getParam('id');
+        $id = $this->getRequest()->getParam('store_id');
         try {
             $type = $this->storeLocatorRepository->get($id);
 

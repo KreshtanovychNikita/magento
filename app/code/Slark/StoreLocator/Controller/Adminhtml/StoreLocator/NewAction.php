@@ -2,16 +2,12 @@
 
 namespace Slark\StoreLocator\Controller\Adminhtml\StoreLocator;
 
-use Slark\StoreLocator\Model\StoreLocatorRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Page;
-use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\InventoryApi\Api\Data\SourceInterface;
-use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
+use Slark\StoreLocator\Model\StoreLocatorRepository;
 
 class NewAction extends Action
 {
@@ -29,7 +25,6 @@ class NewAction extends Action
         $this->storeLocatorRepository = $storeLocatorRepository;
     }
 
-
     public function execute(): ResultInterface
     {
         /** @var Page $result */
@@ -41,4 +36,3 @@ class NewAction extends Action
         return $result;
     }
 }
-

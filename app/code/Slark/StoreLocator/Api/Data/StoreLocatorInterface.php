@@ -4,6 +4,8 @@ namespace Slark\StoreLocator\Api\Data;
 
 //use Magento\Tests\NamingConvention\true\string;
 
+use Magento\Tests\NamingConvention\true\mixed;
+
 interface StoreLocatorInterface
 {
     const ID = 'store_id';
@@ -17,12 +19,27 @@ interface StoreLocatorInterface
     const URL = "url_key";
 
 
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int;
+
+    /**
+     * @param $id
+     * @return StoreLocatorInterface
+     */
+    public function setId($id): StoreLocatorInterface;
+    /**
+     * @return mixed
+     */
     public function getName(): string;
 
     /**
      * @param string $name
+     * @return StoreLocatorInterface
      */
     public function setName(string $name): StoreLocatorInterface;
+
     /**
      * @return string
      */
@@ -30,6 +47,7 @@ interface StoreLocatorInterface
 
     /**
      * @param string $desc
+     * @return StoreLocatorInterface
      */
     public function setDesc(string $desc): StoreLocatorInterface;
     /**
@@ -39,6 +57,7 @@ interface StoreLocatorInterface
 
     /**
      * @param string $addres
+     * @return StoreLocatorInterface
      */
     public function setAddres(string $addres): StoreLocatorInterface;
     /**
@@ -48,6 +67,7 @@ interface StoreLocatorInterface
 
     /**
      * @param string $work
+     * @return StoreLocatorInterface
      */
     public function setWork(string $work): StoreLocatorInterface;
     /**
@@ -57,6 +77,7 @@ interface StoreLocatorInterface
 
     /**
      * @param string $longi
+     * @return StoreLocatorInterface
      */
     public function setLongi(string $longi): StoreLocatorInterface;
     /**
@@ -66,12 +87,18 @@ interface StoreLocatorInterface
 
     /**
      * @param string $lati
+     * @return StoreLocatorInterface
      */
     public function setLati(string $lati): StoreLocatorInterface;
 
-    public function getImage(): string;
     /**
-     * @param  string $image
+     * @return string|null
+     */
+    public function getImage(): ?string;
+
+    /**
+     * @param string $image
+     * @return StoreLocatorInterface
      */
     public function setImage(string $image) : StoreLocatorInterface;
 
@@ -82,11 +109,9 @@ interface StoreLocatorInterface
 
     /**
      * @param string $url
-     *
+     * @return StoreLocatorInterface
      */
     public function setUrl(string $url): StoreLocatorInterface;
-    /**
-     * @return string
-     */
+
 }
 

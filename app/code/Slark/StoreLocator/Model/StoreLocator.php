@@ -23,14 +23,15 @@ class StoreLocator extends AbstractModel implements StoreLocatorInterface
         return $this;
     }
 
-    public function getId()
+    public function getId():?int
     {
-        return $this->_getData('store_id');
+        return $this->getData(StoreLocatorInterface::ID);
     }
 
-    public function setId($value)
+    public function setId($value): StoreLocatorInterface
     {
         $this->setData('store_id', $value);
+        return $this;
     }
 
     public function getAddres(): string
@@ -84,7 +85,7 @@ class StoreLocator extends AbstractModel implements StoreLocatorInterface
         return $this;
     }
 
-    public function getImage(): string
+    public function getImage(): ?string
     {
         return $this->getData(StoreLocatorInterface::IMAGE);
     }
@@ -96,7 +97,7 @@ class StoreLocator extends AbstractModel implements StoreLocatorInterface
     }
     public function getUrl(): string
     {
-        return $this->getUrl(StoreLocatorInterface::URL);
+        return $this->getData(StoreLocatorInterface::URL);
     }
     public function setUrl(string $url): StoreLocatorInterface
     {
