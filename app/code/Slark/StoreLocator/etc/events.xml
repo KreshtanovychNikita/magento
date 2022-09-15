@@ -1,0 +1,7 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="slark_storelocator_save_after">
+        <observer name="slark_storelocator_check_coordinates"
+                  instance="Slark\StoreLocator\StoreMaps\CheckCoordinates"/>
+    </event>
+</config>

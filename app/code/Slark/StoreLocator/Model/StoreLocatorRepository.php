@@ -2,6 +2,7 @@
 
 namespace Slark\StoreLocator\Model;
 
+use Laminas\EventManager\EventManager;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
@@ -17,6 +18,7 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
     private StoreLocatorResource $storeLocatorResource;
     private StoreLocatorFactory $storeLocatorFactory;
     private StoreLocatorSearchResultInterfaceFactory $searchResultInterfaceFactory;
+    private EventManager $eventManager;
 
     /**
      * @param StoreLocatorFactory $storeLocatorFactory
@@ -28,12 +30,15 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
         StoreLocatorFactory $storeLocatorFactory,
         CollectionFactory $collectionFactory,
         StoreLocatorResource  $storeLocatorResource,
-        StoreLocatorSearchResultInterfaceFactory $searchResultInterfaceFactory
+        StoreLocatorSearchResultInterfaceFactory $searchResultInterfaceFactory,
+        EventManager $eventManager
+
     ) {
         $this->storeLocatorFactory = $storeLocatorFactory;
         $this->collectionFactory = $collectionFactory;
         $this->storeLocatorResource = $storeLocatorResource;
         $this->searchResultFactory = $searchResultInterfaceFactory;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -79,6 +84,7 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
      */
     public function save(StoreLocatorInterface $storeLocator): StoreLocatorInterface
     {
+        //$this->eventManager->eventPrefix('slark_storelocator_save', ['storeLocator' => $storeLocator]);
         $this->storeLocatorResource->save($storeLocator);
         return $storeLocator;
     }

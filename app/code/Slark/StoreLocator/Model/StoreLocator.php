@@ -7,6 +7,12 @@ use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 
 class StoreLocator extends AbstractModel implements StoreLocatorInterface
 {
+    protected $_eventPrefix = "store_locator";
+    //store_locator_save_before
+    //store_locator_save_after
+    //store_locator_load_before
+    //store_locator_load_after
+
     protected function _construct()
     {
         parent::_init('Slark\StoreLocator\Model\ResourceModel\StoreLocator');

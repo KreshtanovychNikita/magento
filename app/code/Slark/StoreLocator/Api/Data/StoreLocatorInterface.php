@@ -5,6 +5,7 @@ namespace Slark\StoreLocator\Api\Data;
 //use Magento\Tests\NamingConvention\true\string;
 
 use Magento\Tests\NamingConvention\true\mixed;
+//use Magento\Tests\NamingConvention\true\string;
 
 interface StoreLocatorInterface
 {
@@ -112,6 +113,5 @@ interface StoreLocatorInterface
      * @return StoreLocatorInterface
      */
     public function setUrl(string $url): StoreLocatorInterface;
-
 }
 

@@ -25,7 +25,7 @@ class EditDataProvider extends AbstractDataProvider
         );
     }
 
-    public function getDataSourseData()
+    public function getDataSourseData(): array
     {
         return [];
     }
