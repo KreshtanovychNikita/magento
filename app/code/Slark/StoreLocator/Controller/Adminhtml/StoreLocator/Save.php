@@ -59,7 +59,7 @@ class Save extends Action implements HttpPostActionInterface
         $storeLocator->setLati($data['latitude']);
         $storeLocator->setLongi($data['longitude']);
         $storeLocator->setWork($data['work_schedule']);
-        $storeLocator= $this->setImage($data, $storeLocator);
+        //$storeLocator= $this->setImage($data, $storeLocator);
         $storeLocator->setUrl($data['url_key']);
         $this->storeLocatorRepository->save($storeLocator);
 

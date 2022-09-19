@@ -10,9 +10,9 @@
                 comment="Addres Store"/>
         <column xsi:type="varchar" name="work_schedule" nullable="false" length="128"
                 comment="Work Schedule"/>
-        <column xsi:type="varchar" name="longitude" nullable="false" length="64"
+        <column xsi:type="float" name="longitude" nullable="false"
                 comment="Longitude"/>
-        <column xsi:type="varchar" name="latitude" nullable="false" length="64"
+        <column xsi:type="float" name="latitude" nullable="false"
                 comment="Latitude"/>
         <column xsi:type="varchar" name="image" length="255"
                 comment="Image Store"/>

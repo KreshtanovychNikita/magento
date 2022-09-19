@@ -2,7 +2,6 @@
 
 namespace Slark\StoreLocator\Controller\Adminhtml\StoreLocator\Image;
 
-
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Catalog\Model\ImageUploader;
@@ -11,8 +10,6 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\File\UploaderFactory;
 use Magento\Framework\View\FileSystem;
 use Magento\Store\Model\StoreManagerInterface;
-
-
 
 class Upload extends Action implements HttpPostActionInterface
 {
@@ -34,18 +31,35 @@ class Upload extends Action implements HttpPostActionInterface
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */
+
+    /**
+     * @param Context $context
+     * @param UploaderFactory $uploaderFactory
+     * @param StoreManagerInterface $storeManager
+     * @param FileSystem $fileSystem
+     * @param ImageUploader $imageUploader
+     */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Catalog\Model\ImageUploader $imageUploader
+        Context               $context,
+        UploaderFactory       $uploaderFactory,
+        StoreManagerInterface $storeManager,
+        FileSystem            $fileSystem,
+        ImageUploader         $imageUploader
     ) {
-        parent::__construct($context);
         $this->imageUploader = $imageUploader;
+        $this->storeManager = $storeManager;
+        $this->fileSystem = $fileSystem;
+        parent::__construct($context);
     }
+
     public function execute()
     {
-        $imageId = $this->_request->getParam('param_name', 'image');
-
+        var_dump();
+        die;
+        $imageId = $this->_request->getParam('param_name');
         try {
+//            var_dump();
+//            die;
             $result = $this->imageUploader->saveFileToTmpDir($imageId);
         } catch (\Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];

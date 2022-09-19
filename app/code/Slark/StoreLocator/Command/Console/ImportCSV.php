@@ -1,12 +1,5 @@
 <?php
-
-/**
- *  For use run command in console BASH mode:
- * php bin/magento import:storelocator:csv -p 1location.csv
- *
- */
-
-namespace Slark\StoreLocator\Console\Command;
+namespace Slark\StoreLocator\Command\Console;
 
 use Exception;
 use Magento\Framework\File\Csv;
@@ -17,7 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ImportFile extends Command
+class ImportCSV extends Command
 {
     /**
      * @var StoreLocatorInterfaceFactory
@@ -53,9 +46,9 @@ class ImportFile extends Command
      */
     protected function configure(): void
     {
-        $this->setName('import:storelocator:csv');
+        $this->setName('import:storelocator:file');
         $this->setDescription('Import stores from csv to DB');
-        $this->addOption('path', "p", InputOption::VALUE_OPTIONAL, "Path for csv file");
+        $this->addOption('path', "p", InputOption::VALUE_OPTIONAL, "Path for csv file", );
         parent::configure();
     }
 
@@ -71,33 +64,34 @@ class ImportFile extends Command
         if (empty($path)) {
             throw  new \RuntimeException("Invalid argument");
         }
+//        $i=0;
+//        while ($i < 2) {
+//            $i++;
+            try {
+                $csvData = fopen($path, 'rb');
 
-        try {
-            $csvData = fopen($path, 'rb');
+                $counter = 1;
+                $keys = fgetcsv($csvData);
+                while ($row = fgetcsv($csvData)) {
+                    $store = $this->storeLocatorFactory->create();
+                    $data = array_combine($keys, $row);
+                    //$store->setLongi($data['longitude']);
+                    //$store->setLati($data['latitude']);
+                    $store->setName($data['name']);
+                    $store->setAddres($data['address']);
+                    $store->setDesc($data['description']);
+                    //$store->setImage($data['image']);
+                    $store->setUrl($data['url_key']);
+                    $this->storeLocatorRepository->save($store);
+                    unset($store);
 
-            $counter = 1;
-            $keys = fgetcsv($csvData);
-            while ($row = fgetcsv($csvData)) {
-                $store = $this->storeLocatorFactory->create();
-                $data = array_combine($keys, $row);
-
-                // set value
-                $store->setLongi($data['longitude']);
-                $store->setLati($data['latitude']);
-                $store->setName($data['name']);
-                $store->setAddres($data['addres']);
-                $store->setDesc($data['description']);
-                $store->setImage($data['image']);
-                $store->setUrl($data['url_key']);
-                $this->storeLocatorRepository->save($store);
-                unset($store);
-
-                echo "Store $counter saved \n";
-                $counter++;
+                    echo "Store $counter saved \n";
+                    $counter++;
+                }
+            } catch (Exception $e) {
+                $output->writeln('Error');
+                $output->writeln($e->getMessage());
             }
-        } catch (Exception $e) {
-            $output->writeln('Invalid CSV');
-            $output->writeln($e->getMessage());
         }
-    }
+    //}
 }

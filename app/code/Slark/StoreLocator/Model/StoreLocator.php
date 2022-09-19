@@ -7,6 +7,11 @@ use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 
 class StoreLocator extends AbstractModel implements StoreLocatorInterface
 {
+
+    /**
+     * @var string
+     * Prefix of model events names.
+     */
     protected $_eventPrefix = "store_locator";
     //store_locator_save_before
     //store_locator_save_after

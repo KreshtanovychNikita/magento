@@ -47,7 +47,7 @@ interface StoreLocatorRepositoryInterface
      * @return StoreLocatorInterface
      */
     public function getById(int $store_id): StoreLocatorSearchResultInterface;
-//
+
 //    /**
 //     * Create attribute set from data
 //     *
@@ -57,8 +57,8 @@ interface StoreLocatorRepositoryInterface
 //     * @throws \Magento\Framework\Exception\InputException
 //     * @throws \Magento\Framework\Exception\NoSuchEntityException
 //     */
-//    public function create(\Magento\Eav\Api\Data\AttributeSetInterface $attributeSet, $skeletonId);
-//
+//    public function create(\Magento\Eav\Api\Data\AttributeSetInterface $attributeSet, $skeletonId): \Magento\Eav\Api\Data\AttributeSetInterface;
+////
 //    /**
 //     * @param int $store_id
 //     * @return void

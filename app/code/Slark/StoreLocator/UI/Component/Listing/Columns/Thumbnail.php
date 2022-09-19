@@ -7,6 +7,7 @@ namespace Slark\StoreLocator\UI\Component\Listing\Columns;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class Thumbnail
@@ -25,6 +26,8 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
      */
     private $imageHelper;
 
+    protected StoreManagerInterface $storeManager;
+
     /**
      * @var \Magento\Framework\UrlInterface
      */
@@ -40,6 +43,7 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
      */
     public function __construct(
         ContextInterface $context,
+        StoreManagerInterface $storeManager,
         UiComponentFactory $uiComponentFactory,
         \Magento\Catalog\Helper\Image $imageHelper,
         \Magento\Framework\UrlInterface $urlBuilder,
@@ -49,6 +53,9 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
         parent::__construct($context, $uiComponentFactory, $components, $data);
         $this->imageHelper = $imageHelper;
         $this->urlBuilder = $urlBuilder;
+        $this->storeManager = $storeManager;
+
+
     }
 
     /**
@@ -77,6 +84,8 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
 
         return $dataSource;
     }
+
+
 
     /**
      * Get Alt
