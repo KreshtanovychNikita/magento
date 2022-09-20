@@ -157,9 +157,9 @@
                 </item>
             </argument>
             <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
+<!--                <validation>-->
+<!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
+<!--                </validation>-->
                 <dataType>text</dataType>
                 <label translate="true">URL</label>
                 <dataScope>url_key</dataScope>

@@ -1,7 +1,13 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="store_locator_save_before">
-        <observer name="slark_storelocator_save_before"
+        <observer name="slark_storelocator_save_before_location"
                   instance="Slark\StoreLocator\Observer\CheckCoordinates"/>
+        <observer name="slark_storelocator_save_before_url"
+                  instance="Slark\StoreLocator\Observer\UrlRewrite"/>
     </event>
+
+<!--    <event name="store_locator_save_before">-->
+<!--            <observer name="slark_storelocator_save_before_url" instance="Slark\StoreLocator\Observer\UrlRewrite"/>-->
+<!--    </event>-->
 </config>

@@ -54,8 +54,8 @@ class Upload extends Action implements HttpPostActionInterface
 
     public function execute()
     {
-        var_dump();
-        die;
+//        var_dump();
+//        die;
         $imageId = $this->_request->getParam('param_name');
         try {
 //            var_dump();
