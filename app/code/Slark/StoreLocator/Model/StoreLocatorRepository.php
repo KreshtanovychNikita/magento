@@ -103,7 +103,7 @@ class StoreLocatorRepository implements StoreLocatorRepositoryInterface
         return true;
     }
 
-    public function getById(int $store_id): StoreLocatorSearchResultInterface
+    public function getById(int $store_id): StoreLocatorInterface
     {
         $locator = $this->storeLocatorFactory->create();
         $this->storeLocatorResource->load($locator, $store_id);

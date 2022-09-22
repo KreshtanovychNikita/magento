@@ -2,9 +2,9 @@
 
 namespace Slark\StoreLocator\Model\ResourceModel;
 
-use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\ResourceModel\Db\Context;
+use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 
 class StoreLocator extends AbstractDb
 {

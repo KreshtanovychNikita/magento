@@ -43,10 +43,10 @@ interface StoreLocatorRepositoryInterface
 //     */
 //    public function delete(StoreLocatorInterface $workingHours): bool;
     /**
-     * @param StoreLocatorInterface $store_id
+     * @param int $store_id
      * @return StoreLocatorInterface
      */
-    public function getById(int $store_id): StoreLocatorSearchResultInterface;
+    public function getById(int $store_id): StoreLocatorInterface;
 
 //    /**
 //     * Create attribute set from data

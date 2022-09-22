@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+//declare(strict_types=1);
 
 namespace Slark\StoreLocator\Model;
 
@@ -26,7 +26,7 @@ class VerificationUrl
         $data = $this->collection->load()->getData();
         foreach ($data as $item) {
             if ($item['url_key'] === $url) {
-                return $item['entity_id'];
+                return $item['store_id'];
             }
         }
         return false;
@@ -47,6 +47,11 @@ class VerificationUrl
         return true;
     }
 
+    /**
+     * @param $autoUrl
+     * @param $url
+     * @return bool
+     */
     public function newUrl($autoUrl, $url): bool
     {
         if (($autoUrl) === $url) {

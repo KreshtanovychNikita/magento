@@ -52,9 +52,9 @@ class UrlRewrite implements ObserverInterface
         //$name = $this->collection->load()->getData();
         $check = [" ","$",".","&","?"];
         $name = str_replace($check, '-', strtolower($storeLocator['store_name']));
-        $autoUrl = $name . '/' . 'route';
+        $autoUrl = $name . '-route' ;
         if ($this->url->newUrl($storeLocator['url_key'], $autoUrl)==false) {
-            $newAutoUrl = $name . '/' . 'route' . random_int(1, 255);
+            $newAutoUrl = $name . '-route' . random_int(1, 255);
             $storeLocator->setUrl($newAutoUrl);
         } else {
             $storeLocator->setUrl($autoUrl);

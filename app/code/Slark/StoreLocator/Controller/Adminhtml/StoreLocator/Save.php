@@ -4,9 +4,11 @@ namespace Slark\StoreLocator\Controller\Adminhtml\StoreLocator;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+//use Magento\Catalog\Model\ImageUploader;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\Exception\LocalizedException;
 use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 use Slark\StoreLocator\Api\StoreLocatorRepositoryInterface;
 use Slark\StoreLocator\Model\StoreLocatorFactory;
@@ -17,14 +19,17 @@ class Save extends Action implements HttpPostActionInterface
     private StoreLocatorRepositoryInterface $storeLocatorRepository;
     private StoreLocatorFactory $storeLocatorFactory;
     private RedirectFactory $redirectFactory;
+    //private ImageUploader $imageUploader;
 
     public function __construct(
         Context $context,
         StoreLocatorRepository $storeLocatorRepository,
         StoreLocatorFactory $storeLocatorFactory,
+        //ImageUploader       $imageUploader,
         RedirectFactory     $redirectFactory
     ) {
         parent::__construct($context);
+        //$this->imageUploader = $imageUploader;
         $this->storeLocatorRepository = $storeLocatorRepository;
         $this->storeLocatorFactory = $storeLocatorFactory;
         $this->redirectFactory = $redirectFactory;
@@ -77,7 +82,6 @@ class Save extends Action implements HttpPostActionInterface
 //        return $redirectResult;
     }
 
-
     private function processRedirectAfterSuccessSave(Redirect $resultRedirect, string $id)
     {
         if ($this->getRequest()->getParam('back')) {
@@ -99,4 +103,21 @@ class Save extends Action implements HttpPostActionInterface
             $resultRedirect->setPath('*/*/');
         }
     }
+
+//    /**
+//     * @throws LocalizedException
+//     */
+//    public function setImage($data, StoreLocatorInterface $model): StoreLocatorInterface
+//    {
+//        if (isset($data['image'][0]['name'], $data['image'][0]['tmp_name'])) {
+//            $data['image'] = $data['image'][0]['name'];
+//            $this->imageUploader->moveFileFromTmp($data['image']);
+//        } elseif (isset($data['image'][0]['name']) && !isset($data['image'][0]['tmp_name'])) {
+//            $data['image'] = $data['image'][0]['name'];
+//        } else {
+//            $data['image'] = '';
+//        }
+//        $model->setImage($data['image']);
+//        return $model;
+//    }
 }

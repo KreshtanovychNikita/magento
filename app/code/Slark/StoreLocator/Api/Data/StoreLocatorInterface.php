@@ -104,9 +104,9 @@ interface StoreLocatorInterface
     public function setImage(string $image) : StoreLocatorInterface;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl(): string;
+    public function getUrl(): ?string;
 
     /**
      * @param string $url
