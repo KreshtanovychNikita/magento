@@ -36,4 +36,17 @@ class Index extends Template
     {
         return $this->collection->create();
     }
+
+    /**
+     * @return string
+     * @throws NoSuchEntityException
+     */
+    public function getMediaUrl():string
+    {
+        $mediaUrl = $this->storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+        return $mediaUrl;
+    }
+
 }

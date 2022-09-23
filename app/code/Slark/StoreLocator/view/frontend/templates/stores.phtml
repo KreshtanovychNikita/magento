@@ -10,7 +10,7 @@ if ($collection->count()) {
             <tr>
                 <th scope="col" class="col id"><?php echo('ID') ?></th>
                 <th scope="col" class="col storename"><?php echo('Store Name') ?></th>
-<!--                <th scope="col" class="col image">--><?php //echo('Image')?><!--</th>-->
+                <th scope="col" class="col image"><?php echo('Image')?></th>
                 <th scope="col" class="col address"><?php echo('Address') ?></th>
                 <th scope="col" class="col description"><?php echo('Description') ?></th>
                 <th scope="col" class="col schedule"><?php echo('Schedule') ?></th>
@@ -30,7 +30,19 @@ if ($collection->count()) {
     $urlPath =$this->getBaseUrl() . 'stores/' . $url; ?>
                         <a href="<?php echo $urlPath ?>"><?php echo $item->getName(); ?></a>
                     </td>
-                    <td data-th="<?php echo(('Address')) ?>" class="col address">
+                    <td data-th="<?= $block->escapeHtml(__('Image')) ?>" class="col image">
+                        <?php
+                        $path = $this->getMediaUrl().'wysiwyg/storecatalog/'.$item->getImage();
+                        ?>
+                        <img alt="No image available :("
+                             src="<?php echo $path?>"
+                             onclick="window.open('<?php echo $path?>', '_blank');"
+                             width="250"
+                             style="cursor:pointer;"
+                        >
+                    </td>
+
+                    <td data-th="<?php echo(__('Address')) ?>" class="col address">
                         <?php echo $item->getAddres() ?>
                     </td>
                     <td data-th="<?php echo(('Description')) ?>" class="col description">

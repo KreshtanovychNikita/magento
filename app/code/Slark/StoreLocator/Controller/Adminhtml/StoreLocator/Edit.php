@@ -4,51 +4,63 @@ namespace Slark\StoreLocator\Controller\Adminhtml\StoreLocator;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
+use Slark\StoreLocator\Api\Data\StoreLocatorInterfaceFactory;
+use Slark\StoreLocator\Api\Data\StoreLocatorInterfaceFactory as StoreLocatorFactory;
+use Slark\StoreLocator\Model\ResourceModel\StoreLocator as StoreLocatorResource;
 use Slark\StoreLocator\Model\StoreLocatorRepository;
 
 class Edit extends Action
 {
+    //public const ADMIN_RESOURCE = Authorization::ACTION_STORE_LOCATOR_EDIT;
     /**
      * @see _isAllowed()
+     * @param StoreLocatorFactory $storeLocatorFactory
+     * @param StoreLocatorResource $storeLocatorResource
+     * @param Context $context
+
      */
     const ADMIN_RESOURCE = 'Slark_StoreLocator::store_locator';
     private StoreLocatorRepository $storeLocatorRepository;
+//    private StoreLocatorInterfaceFactory $storeLocatorFactory;
+//    protected StoreLocatorResource $storeLocatorResource;
 
     public function __construct(
         Context $context,
-        StoreLocatorRepository $storeLocatorRepository
+        StoreLocatorRepository $storeLocatorRepository,
+        StoreLocatorInterfaceFactory $storeLocatorFactory,
+        StoreLocatorResource        $storeLocatorResource
+
     ) {
         parent::__construct($context);
         $this->storeLocatorRepository = $storeLocatorRepository;
+        $this->storeLocatorFactory = $storeLocatorFactory;
+        $this->storeLocatorResource =$storeLocatorResource;
     }
 
-    public function execute(): ResultInterface
+    public function execute() : \Magento\Framework\Controller\ResultInterface
     {
-        $id = $this->getRequest()->getParam('store_id');
-        try {
-            $type = $this->storeLocatorRepository->get($id);
+        $storeLocator = $this->storeLocatorFactory->create();
 
-            /** @var Page $result */
-            $result = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-            $result->setActiveMenu('Slark_StoreLocator::store_locator')
-                ->addBreadcrumb(__('Edit Store Locator'), __('Store Locator'));
-            $result->getConfig()
-                ->getTitle()
-                ->prepend(__('Edit Store Locator:%store_name', ['store_name' => $type->getName()]));
-        } catch (NoSuchEntityException $e) {
-            /** @var Redirect $result */
-            $result = $this->resultRedirectFactory->create();
-            $this->messageManager->addErrorMessage(
-                __('Store with id "%value" does not exist.', ['value' => $id])
-            );
-            $result->setPath('*/*');
+        if ($entityId = (int) $this->getRequest()->getParam('store_id')) {
+            $this->storeLocatorResource->load($storeLocator, $entityId);
+
+            if (!$storeLocator->getId()) {
+                $this->messageManager->addErrorMessage(__('This store no exists'));
+
+                /** @var Redirect $resultRedirect */
+                $resultRedirect = $this->resultRedirectFactory->create();
+
+                return $resultRedirect->setPath('*/*/');
+            }
         }
 
-        return $result;
+        $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        $resultPage->getConfig()->getTitle()->prepend(
+            $storeLocator->getId() ? __('Edit Store') : __('New Store')
+        );
+
+        return $resultPage;
     }
 }

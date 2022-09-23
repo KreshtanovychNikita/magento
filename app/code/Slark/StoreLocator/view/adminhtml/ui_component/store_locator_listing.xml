@@ -116,24 +116,17 @@
                 <label translate="true">URL KEY</label>
             </settings>
         </column>
-        <column name="image" component="Magento_Ui/js/grid/columns/thumbnail"
-                class="Slark\StoreLocator\UI\Component\Listing\Columns\Thumbnail" sortOrder="10">
+        <column name="image" class="Slark\StoreLocator\UI\Component\Listing\Columns\Thumbnail" sortOrder="90">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
                     <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="altField" xsi:type="string">title</item>
                     <item name="has_preview" xsi:type="string">1</item>
-                    <item name="addField" xsi:type="boolean">true</item>
                     <item name="label" xsi:type="string" translate="true">Image</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">false</item>
-                        </item>
-                    </item>
                 </item>
             </argument>
         </column>
+
 
         <actionsColumn name="actions"
                        class="Slark\StoreLocator\UI\Component\Listing\Columns\StoreLocatorActions">

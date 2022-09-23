@@ -1,5 +1,5 @@
 <?php
-//declare(strict_types=1);
+declare(strict_types=1);
 
 namespace Slark\StoreLocator\Block;
 
@@ -39,4 +39,18 @@ class Store extends Template
         }
         return $store['store'];
     }
+
+    /**
+     * @return string
+     * @throws NoSuchEntityException
+     */
+    public function getMediaUrl():string
+    {
+        $mediaUrl = $this->storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+        return $mediaUrl;
+    }
+
+
 }

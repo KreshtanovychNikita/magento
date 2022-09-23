@@ -11,6 +11,7 @@ if ($store) {
 <!--            <th scope="col" class="col id">--><?php //echo ('ID')?><!--</th>-->
             <th scope="col" class="col storename"><?php echo('Store Name') ?></th>
 <!--            <th scope="col" class="col image">--><?php //echo ('Image')?><!--</th>-->
+            <th scope="col" class="col image"><?php echo('Image') ?></th>
             <th scope="col" class="col address"><?php echo('Address') ?></th>
             <th scope="col" class="col description"><?php echo('Description') ?></th>
             <th scope="col" class="col schedule"><?php echo('Schedule') ?></th>
@@ -24,6 +25,17 @@ if ($store) {
             <td data-th="<?php echo(('Store Name')) ?>" class="col storename">
                 <?php echo $store->getName() ?>
             </td>
+            <td data-th="<?= $block->escapeHtml(__('Image')) ?>" class="col image">
+                <?php
+                $path = $block->getMediaUrl() . 'wysiwyg/storecatalog/' . $store->getImage(); ?>
+                <img alt="No image available :("
+                     src="<?php echo $path?>"
+                     onclick="window.open('<?php echo $path?>', '_blank');"
+                     width="250"
+                     style="cursor:pointer;"
+                >
+            </td>
+
 
             <td data-th="<?php echo(('Address')) ?>" class="col address">
                 <?php echo $store->getAddres() ?>

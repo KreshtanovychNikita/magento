@@ -4,10 +4,11 @@ namespace Slark\StoreLocator\Controller\Adminhtml\StoreLocator;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-//use Magento\Catalog\Model\ImageUploader;
+use Magento\Catalog\Model\ImageUploader;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\LocalizedException;
 use Slark\StoreLocator\Api\Data\StoreLocatorInterface;
 use Slark\StoreLocator\Api\StoreLocatorRepositoryInterface;
@@ -19,22 +20,29 @@ class Save extends Action implements HttpPostActionInterface
     private StoreLocatorRepositoryInterface $storeLocatorRepository;
     private StoreLocatorFactory $storeLocatorFactory;
     private RedirectFactory $redirectFactory;
-    //private ImageUploader $imageUploader;
+    private ImageUploader $imageUploader;
 
     public function __construct(
         Context $context,
         StoreLocatorRepository $storeLocatorRepository,
         StoreLocatorFactory $storeLocatorFactory,
-        //ImageUploader       $imageUploader,
+        ImageUploader       $imageUploader,
         RedirectFactory     $redirectFactory
     ) {
         parent::__construct($context);
-        //$this->imageUploader = $imageUploader;
+        $this->imageUploader = $imageUploader;
         $this->storeLocatorRepository = $storeLocatorRepository;
         $this->storeLocatorFactory = $storeLocatorFactory;
         $this->redirectFactory = $redirectFactory;
+        $this->imageUploader->setBasePath('storelocator/image');
+        $this->imageUploader->setBaseTmpPath('storelocator/tmp/image');
+        parent::__construct($context);
     }
 
+    /**
+     * @throws AlreadyExistsException
+     * @throws LocalizedException
+     */
     public function execute()
     {
         $redirectResult = $this->redirectFactory->create();
@@ -64,7 +72,7 @@ class Save extends Action implements HttpPostActionInterface
         $storeLocator->setLati($data['latitude']);
         $storeLocator->setLongi($data['longitude']);
         $storeLocator->setWork($data['work_schedule']);
-        //$storeLocator= $this->setImage($data, $storeLocator);
+        $storeLocator= $this->setImage($data, $storeLocator);
         $storeLocator->setUrl($data['url_key']);
         $this->storeLocatorRepository->save($storeLocator);
 
@@ -104,20 +112,21 @@ class Save extends Action implements HttpPostActionInterface
         }
     }
 
-//    /**
-//     * @throws LocalizedException
-//     */
-//    public function setImage($data, StoreLocatorInterface $model): StoreLocatorInterface
-//    {
-//        if (isset($data['image'][0]['name'], $data['image'][0]['tmp_name'])) {
-//            $data['image'] = $data['image'][0]['name'];
-//            $this->imageUploader->moveFileFromTmp($data['image']);
-//        } elseif (isset($data['image'][0]['name']) && !isset($data['image'][0]['tmp_name'])) {
-//            $data['image'] = $data['image'][0]['name'];
-//        } else {
-//            $data['image'] = '';
-//        }
-//        $model->setImage($data['image']);
-//        return $model;
-//    }
+    /**
+     * @throws LocalizedException
+     */
+    public function setImage($data, StoreLocatorInterface $model): StoreLocatorInterface
+    {
+        if (isset($data['image'][0]['name'], $data['image'][0]['tmp_name'])) {
+            $data['image'] = $data['image'][0]['name'];
+            $this->imageUploader->moveFileFromTmp($data['image']);
+        } elseif (isset($data['image'][0]['name']) && !isset($data['image'][0]['tmp_name'])) {
+            $data['image'] = $data['image'][0]['name'];
+        } else {
+            $data['image'] = '';
+        }
+        $model->setImage($data['image']);
+        return $model;
+    }
+
 }
