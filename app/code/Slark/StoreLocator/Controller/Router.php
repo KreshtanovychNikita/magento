@@ -6,9 +6,7 @@ use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\RouterInterface;
-use Slark\StoreLocator\Api\Data\StoreLocatorInterfaceFactory;
 use Slark\StoreLocator\Api\StoreLocatorRepositoryInterface as StoreLocatorRepository;
-use Slark\StoreLocator\Model\ResourceModel\StoreLocator;
 use Slark\StoreLocator\Model\VerificationUrl;
 
 /**
@@ -41,7 +39,6 @@ class Router implements RouterInterface
     {
         $urlKey = trim($request->getPathInfo(), '/');
         $url = explode('/', $urlKey);
-
         if (str_contains($urlKey, 'stores')) {
             $request->setModuleName('stores');
             $request->setControllerName('store');
@@ -53,14 +50,12 @@ class Router implements RouterInterface
                     $request->setParams([
                         'store' => $store
                     ]);
-                    return $this->actionFactory->create(Forward::class);
+                    //return $this->actionFactory->create(Forward::class);
                 }
             }
         }
         return $this->actionFactory->create(Forward::class);
 
-        return null;
+        // return null;
     }
-
-
 }

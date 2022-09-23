@@ -5,7 +5,6 @@
             <argument name="routerList" xsi:type="array">
                 <item name="storeLocator" xsi:type="array">
                     <item name="class" xsi:type="string">Slark\StoreLocator\Controller\Router</item>
-                    <item name="disable" xsi:type="boolean">false</item>
                     <item name="sortOrder" xsi:type="string">50</item>
                 </item>
             </argument>

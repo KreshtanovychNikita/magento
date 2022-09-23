@@ -17,20 +17,7 @@ class VerificationUrl
         $this->collection = $collection;
     }
 
-    /**
-     * @param string $url
-     * @return string|bool
-     */
-    public function checkUrlKeys(string $url)
-    {
-        $data = $this->collection->load()->getData();
-        foreach ($data as $item) {
-            if ($item['url_key'] === $url) {
-                return $item['store_id'];
-            }
-        }
-        return false;
-    }
+
 
     /**
      * @param $url
@@ -58,5 +45,19 @@ class VerificationUrl
             return false;
         }
         return true;
+    }
+    /**
+ * @param string $url
+ * @return string|bool
+ */
+    public function checkUrlKeys(string $url)
+    {
+        $data = $this->collection->load()->getData();
+        foreach ($data as $item) {
+            if ($item['url_key'] === $url) {
+                return $item['store_id'];
+            }
+        }
+        return false;
     }
 }

@@ -5,45 +5,44 @@ if ($collection->count()) {
     ?>
     <div class="table-wrapper orders-history">
         <table class="data table table-order-items history" id="my-orders-table">
-            <caption class="table-caption"><?php echo __('Grid Record') ?></caption>
+            <caption class="table-caption"><?php echo('Grid Record') ?></caption>
             <thead>
             <tr>
-                <th scope="col" class="col id"><?php echo __('ID') ?></th>
-                <th scope="col" class="col storename"><?php echo __('Store Name') ?></th>
-                <th scope="col" class="col image"><?php echo __('Image') ?></th>
-                <th scope="col" class="col address"><?php echo __('Address') ?></th>
-                <th scope="col" class="col description"><?php echo __('Description') ?></th>
-                <th scope="col" class="col schedule"><?php echo __('Schedule') ?></th>
-                <th scope="col" class="col longitude"><?php echo __('Longitude') ?></th>
-                <th scope="col" class="col latitude"><?php echo __('Latitude') ?></th>
+                <th scope="col" class="col id"><?php echo('ID') ?></th>
+                <th scope="col" class="col storename"><?php echo('Store Name') ?></th>
+<!--                <th scope="col" class="col image">--><?php //echo('Image')?><!--</th>-->
+                <th scope="col" class="col address"><?php echo('Address') ?></th>
+                <th scope="col" class="col description"><?php echo('Description') ?></th>
+                <th scope="col" class="col schedule"><?php echo('Schedule') ?></th>
+                <th scope="col" class="col longitude"><?php echo('Longitude') ?></th>
+                <th scope="col" class="col latitude"><?php echo('Latitude') ?></th>
             </tr>
             </thead>
             <tbody>
             <?php
             foreach ($collection as $item): ?>
                 <tr>
-                    <td data-th="<?= $block->escapeHtml(__('ID')) ?>" class="col id">
+                    <td data-th="<?php echo(('ID')) ?>" class="col id">
                         <?php echo $item->getId() ?>
                     </td>
-                    <td data-th="<?= $block->escapeHtml(__('Store Name')) ?>" class="col storename">
-                        <?php
-                        $url = $item->getUrl();
+                    <td data-th="<?php echo(('Store Name')) ?>" class="col storename">
+                        <?php $url = $item->getUrl();
     $urlPath =$this->getBaseUrl() . 'stores/' . $url; ?>
                         <a href="<?php echo $urlPath ?>"><?php echo $item->getName(); ?></a>
                     </td>
-                    <td data-th="<?= $block->escapeHtml(__('Address')) ?>" class="col address">
+                    <td data-th="<?php echo(('Address')) ?>" class="col address">
                         <?php echo $item->getAddres() ?>
                     </td>
-                    <td data-th="<?= $block->escapeHtml(__('Description')) ?>" class="col description">
+                    <td data-th="<?php echo(('Description')) ?>" class="col description">
                         <?php echo $item->getDesc() ?>
                     </td>
-                    <td data-th="<?= $block->escapeHtml(__('Schedule')) ?>" class="col schedule">
+                    <td data-th="<?php echo(('Schedule')) ?>" class="col schedule">
                         <?php echo $item->getWork() ?>
                     </td>
-                    <td data-th="<?= $block->escapeHtml(__('Longitude')) ?>" class="col longitude">
+                    <td data-th="<?php echo(('Longitude')) ?>" class="col longitude">
                         <?php echo $item->getLongi() ?>
                     </td>
-                    <td data-th="<?= $block->escapeHtml(__('Latitude')) ?>" class="col latitude">
+                    <td data-th="<?php echo(('Latitude')) ?>" class="col latitude">
                         <?php echo $item->getLati() ?>
                     </td>
                 </tr>
